@@ -34,6 +34,7 @@ htmlcov/
 
 # Model checkpoints & tensorboard logs (large binary files)
 models/*.zip
+models/checkpoints_*
 logs/*
 !logs/.gitkeep
 !models/.gitkeep

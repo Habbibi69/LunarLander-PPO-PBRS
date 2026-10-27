@@ -1,0 +1,17 @@
+{
+  "model_path": "random_agent",
+  "num_episodes": 50,
+  "base_seed": 1000,
+  "mean_return": -186.34,
+  "std_return": 103.16,
+  "median_return": -165.02,
+  "min_return": -433.39,
+  "max_return": 10.94,
+  "mean_length": 97.4,
+  "success_rate_pct": 0.0,
+  "crash_rate_pct": 100.0,
+  "timeout_rate_pct": 0.0,
+  "success_count": 0,
+  "crash_count": 50,
+  "timeout_count": 0
+}
