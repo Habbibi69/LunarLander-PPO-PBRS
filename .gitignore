@@ -1,0 +1,52 @@
+# Virtual Environment
+.venv/
+env/
+venv/
+
+# Python cache and bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Distribution / packaging
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Testing and linters
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+
+# Model checkpoints & tensorboard logs (large binary files)
+models/*.zip
+logs/*
+!logs/.gitkeep
+!models/.gitkeep
+
+# Experiment media (keep .gitkeep or specific readme demo)
+media/*.mp4
+media/*.gif
+!media/.gitkeep
+results/*.csv
+!results/.gitkeep
+
+# IDE and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
