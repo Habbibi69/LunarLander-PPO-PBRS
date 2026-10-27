@@ -51,6 +51,7 @@ def evaluate_agent(
     success_count = 0
     crash_count = 0
     timeout_count = 0
+    ambiguous_count = 0
 
     for ep_idx in range(num_episodes):
         ep_seed = base_seed + ep_idx
@@ -82,13 +83,17 @@ def evaluate_agent(
 
         # Determine ground-truth flight outcome
         if terminated:
-            # Landing terminal reward is +100, crash penalty is -100
+            # Clean landing receives terminal +100 bonus, crash receives -100 penalty
             if ep_return >= 200.0 or (last_step_reward >= 50.0 and both_legs_touched):
                 outcome = "SUCCESS"
                 success_count += 1
-            else:
+            elif last_step_reward <= -50.0 or ep_return <= -50.0:
                 outcome = "CRASH"
                 crash_count += 1
+            else:
+                outcome = "AMBIGUOUS"
+                ambiguous_count += 1
+                print(f"  [WARN] Ambiguous episode {ep_idx+1} (seed {ep_seed}): Return={ep_return:.1f}, LastReward={last_step_reward:.1f}, BothLegs={both_legs_touched}")
         elif truncated:
             outcome = "TIMEOUT"
             timeout_count += 1
@@ -124,6 +129,7 @@ def evaluate_agent(
     success_rate = (success_count / num_episodes) * 100
     crash_rate = (crash_count / num_episodes) * 100
     timeout_rate = (timeout_count / num_episodes) * 100
+    ambiguous_rate = (ambiguous_count / num_episodes) * 100
 
     summary = {
         "model_path": str(model_path) if model_path else "random_agent",
@@ -138,9 +144,11 @@ def evaluate_agent(
         "success_rate_pct": round(success_rate, 2),
         "crash_rate_pct": round(crash_rate, 2),
         "timeout_rate_pct": round(timeout_rate, 2),
+        "ambiguous_rate_pct": round(ambiguous_rate, 2),
         "success_count": success_count,
         "crash_count": crash_count,
         "timeout_count": timeout_count,
+        "ambiguous_count": ambiguous_count,
     }
 
     # Save results
@@ -171,6 +179,7 @@ def evaluate_agent(
     print(f"  Landing Success Rate: {success_rate:.1f}% ({success_count}/{num_episodes})")
     print(f"  Crash Rate:           {crash_rate:.1f}% ({crash_count}/{num_episodes})")
     print(f"  Timeout Rate:         {timeout_rate:.1f}% ({timeout_count}/{num_episodes})")
+    print(f"  Ambiguous Rate:       {ambiguous_rate:.1f}% ({ambiguous_count}/{num_episodes})")
     print(f"  Summary JSON:         {json_path}")
     print(f"  Per-Episode CSV:      {csv_path}")
     print("=" * 80)
