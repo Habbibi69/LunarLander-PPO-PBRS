@@ -177,15 +177,16 @@ In this hypothesis test, the $p$-value represents the probability of observing a
 ### Setup
 ```bash
 # Clone repository
-git clone https://github.com/your-username/Model_Training.git
-cd Model_Training
+git clone https://github.com/Habbibi69/LunarLander-PPO-PBRS.git
+cd LunarLander-PPO-PBRS
 
-# Create and activate virtual environment
-python -m venv .venv
+# Create and activate virtual environment (Python 3.11)
+# On Windows (PowerShell):
+py -3.11 -m venv .venv
+.\.venv\Scripts\Activate.ps1
 
-# On Windows:
-.venv\Scripts\activate
 # On Linux / macOS:
+python3.11 -m venv .venv
 source .venv/bin/activate
 
 # Install dependencies
@@ -231,7 +232,7 @@ python src/analyze_statistical_results.py
 ## 8. Repository Layout
 
 ```
-Model_Training/
+LunarLander-PPO-PBRS/
 ├── configs/
 │   ├── baseline_config.json            # Baseline PPO hyperparameters
 │   └── pbrs_config.json                # PBRS PPO hyperparameters & shaping weights
