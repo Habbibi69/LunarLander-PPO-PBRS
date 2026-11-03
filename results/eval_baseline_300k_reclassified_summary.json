@@ -1,0 +1,21 @@
+{
+  "model_path": "models\\ppo_baseline_300k.zip",
+  "num_episodes": 100,
+  "base_seed": 1000,
+  "mean_return": 99.54,
+  "std_return": 128.81,
+  "median_return": 175.05,
+  "min_return": -146.25,
+  "max_return": 258.88,
+  "mean_length": 418.6,
+  "success_rate_pct": 57.0,
+  "crash_rate_pct": 39.0,
+  "out_of_bounds_rate_pct": 0.0,
+  "timeout_rate_pct": 4.0,
+  "ambiguous_rate_pct": 0.0,
+  "success_count": 57,
+  "crash_count": 39,
+  "out_of_bounds_count": 0,
+  "timeout_count": 4,
+  "ambiguous_count": 0
+}

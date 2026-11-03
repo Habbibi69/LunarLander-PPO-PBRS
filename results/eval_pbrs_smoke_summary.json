@@ -1,0 +1,21 @@
+{
+  "model_path": "models\\ppo_pbrs_smoke.zip",
+  "num_episodes": 50,
+  "base_seed": 1000,
+  "mean_return": -992.68,
+  "std_return": 758.92,
+  "median_return": -698.88,
+  "min_return": -3863.27,
+  "max_return": -216.45,
+  "mean_length": 185.2,
+  "success_rate_pct": 0.0,
+  "crash_rate_pct": 14.0,
+  "out_of_bounds_rate_pct": 86.0,
+  "timeout_rate_pct": 0.0,
+  "ambiguous_rate_pct": 0.0,
+  "success_count": 0,
+  "crash_count": 7,
+  "out_of_bounds_count": 43,
+  "timeout_count": 0,
+  "ambiguous_count": 0
+}

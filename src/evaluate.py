@@ -50,6 +50,7 @@ def evaluate_agent(
     lengths = []
     success_count = 0
     crash_count = 0
+    out_of_bounds_count = 0
     timeout_count = 0
     ambiguous_count = 0
 
@@ -81,19 +82,25 @@ def evaluate_agent(
             obs = next_obs
             done = terminated or truncated
 
-        # Determine ground-truth flight outcome
+        # Determine ground-truth flight outcome based on physical signals and terminal rewards
         if terminated:
-            # Clean landing receives terminal +100 bonus, crash receives -100 penalty
-            if ep_return >= 200.0 or (last_step_reward >= 50.0 and both_legs_touched):
+            # 1. Clean Landing: Box2D body rested asleep (+100 terminal reward in LunarLander-v3)
+            if np.isclose(last_step_reward, 100.0, atol=1.0):
                 outcome = "SUCCESS"
                 success_count += 1
-            elif last_step_reward <= -50.0 or ep_return <= -50.0:
-                outcome = "CRASH"
-                crash_count += 1
+            # 2. Terminal Failure (-100 terminal penalty in LunarLander-v3)
+            elif np.isclose(last_step_reward, -100.0, atol=1.0):
+                # Distinguish horizontal boundary exit (|x| >= 1.0) from terrain hull collision
+                if abs(obs[0]) >= 1.0:
+                    outcome = "OUT_OF_BOUNDS"
+                    out_of_bounds_count += 1
+                else:
+                    outcome = "CRASH"
+                    crash_count += 1
             else:
                 outcome = "AMBIGUOUS"
                 ambiguous_count += 1
-                print(f"  [WARN] Ambiguous episode {ep_idx+1} (seed {ep_seed}): Return={ep_return:.1f}, LastReward={last_step_reward:.1f}, BothLegs={both_legs_touched}")
+                print(f"  [WARN] Ambiguous episode {ep_idx+1} (seed {ep_seed}): Return={ep_return:.1f}, LastReward={last_step_reward:.1f}")
         elif truncated:
             outcome = "TIMEOUT"
             timeout_count += 1
@@ -128,6 +135,7 @@ def evaluate_agent(
 
     success_rate = (success_count / num_episodes) * 100
     crash_rate = (crash_count / num_episodes) * 100
+    out_of_bounds_rate = (out_of_bounds_count / num_episodes) * 100
     timeout_rate = (timeout_count / num_episodes) * 100
     ambiguous_rate = (ambiguous_count / num_episodes) * 100
 
@@ -143,10 +151,12 @@ def evaluate_agent(
         "mean_length": round(mean_length, 1),
         "success_rate_pct": round(success_rate, 2),
         "crash_rate_pct": round(crash_rate, 2),
+        "out_of_bounds_rate_pct": round(out_of_bounds_rate, 2),
         "timeout_rate_pct": round(timeout_rate, 2),
         "ambiguous_rate_pct": round(ambiguous_rate, 2),
         "success_count": success_count,
         "crash_count": crash_count,
+        "out_of_bounds_count": out_of_bounds_count,
         "timeout_count": timeout_count,
         "ambiguous_count": ambiguous_count,
     }
@@ -178,6 +188,7 @@ def evaluate_agent(
     print(f"  Mean Episode Length:  {mean_length:.1f} steps")
     print(f"  Landing Success Rate: {success_rate:.1f}% ({success_count}/{num_episodes})")
     print(f"  Crash Rate:           {crash_rate:.1f}% ({crash_count}/{num_episodes})")
+    print(f"  Out of Bounds Rate:   {out_of_bounds_rate:.1f}% ({out_of_bounds_count}/{num_episodes})")
     print(f"  Timeout Rate:         {timeout_rate:.1f}% ({timeout_count}/{num_episodes})")
     print(f"  Ambiguous Rate:       {ambiguous_rate:.1f}% ({ambiguous_count}/{num_episodes})")
     print(f"  Summary JSON:         {json_path}")

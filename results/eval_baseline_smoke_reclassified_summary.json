@@ -1,0 +1,21 @@
+{
+  "model_path": "models\\ppo_baseline_smoke.zip",
+  "num_episodes": 50,
+  "base_seed": 1000,
+  "mean_return": -652.01,
+  "std_return": 190.99,
+  "median_return": -681.84,
+  "min_return": -1063.38,
+  "max_return": -310.26,
+  "mean_length": 155.7,
+  "success_rate_pct": 0.0,
+  "crash_rate_pct": 0.0,
+  "out_of_bounds_rate_pct": 100.0,
+  "timeout_rate_pct": 0.0,
+  "ambiguous_rate_pct": 0.0,
+  "success_count": 0,
+  "crash_count": 0,
+  "out_of_bounds_count": 50,
+  "timeout_count": 0,
+  "ambiguous_count": 0
+}

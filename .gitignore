@@ -32,18 +32,39 @@ wheels/
 htmlcov/
 .mypy_cache/
 
-# Model checkpoints & tensorboard logs (large binary files)
-models/*.zip
+# Model checkpoints & intermediate files
 models/checkpoints_*
+models/*smoke*.zip
+logs/*smoke*
+
+# Training monitor logs (keep benchmark runs for learning curve reproduction)
 logs/*
 !logs/.gitkeep
+!logs/ppo_baseline_300k/
+!logs/ppo_baseline_300k/monitor.csv
+!logs/ppo_baseline_300k/training_metadata.json
+!logs/ppo_pbrs_300k/
+!logs/ppo_pbrs_300k/monitor_native.monitor.csv
+!logs/ppo_pbrs_300k/training_metadata.json
+
+# Model checkpoints (ignore bulk binaries, whitelist final 300k benchmark models ~148 KB each)
+models/*.zip
+!models/ppo_baseline_300k.zip
+!models/ppo_pbrs_300k.zip
 !models/.gitkeep
 
 # Experiment media (keep .gitkeep or specific readme demo)
 media/*.mp4
 media/*.gif
 !media/.gitkeep
+
+# Evaluation results (ignore scratch/smoke CSVs, whitelist benchmark 100-episode CSVs)
+results/*smoke*.csv
+results/*random*.csv
 results/*.csv
+!results/eval_baseline_300k_episodes.csv
+!results/eval_baseline_300k_reclassified_episodes.csv
+!results/eval_pbrs_300k_episodes.csv
 !results/.gitkeep
 
 # IDE and OS files

@@ -1,0 +1,30 @@
+{
+  "experiment_name": "ppo_pbrs_300k",
+  "env_id": "LunarLander-v3",
+  "seed": 42,
+  "total_timesteps": 300000,
+  "elapsed_seconds": 229.92,
+  "timesteps_per_second": 1304.77,
+  "hyperparameters": {
+    "learning_rate": 0.0003,
+    "n_steps": 2048,
+    "batch_size": 64,
+    "n_epochs": 10,
+    "gamma": 0.99,
+    "gae_lambda": 0.95,
+    "clip_range": 0.2,
+    "ent_coef": 0.01,
+    "vf_coef": 0.5,
+    "max_grad_norm": 0.5
+  },
+  "shaping": {
+    "gamma": 0.99,
+    "w_descent": 4.0,
+    "w_tilt": 3.0,
+    "w_spin": 1.0,
+    "w_center": 2.0
+  },
+  "saved_model_path": "C:\\Users\\npanc\\OneDrive\\Desktop\\Model_Training\\models\\ppo_pbrs_300k.zip",
+  "monitor_native_log": "C:\\Users\\npanc\\OneDrive\\Desktop\\Model_Training\\logs\\ppo_pbrs_300k\\monitor_native.monitor.csv",
+  "monitor_shaped_log": "C:\\Users\\npanc\\OneDrive\\Desktop\\Model_Training\\logs\\ppo_pbrs_300k\\monitor_shaped.csv"
+}

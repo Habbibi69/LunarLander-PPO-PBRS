@@ -1,0 +1,81 @@
+{
+  "evaluation_protocol": {
+    "num_episodes": 100,
+    "seed_range": [
+      1000,
+      1099
+    ],
+    "deterministic": true,
+    "environment": "LunarLander-v3 (Unshaped Native)"
+  },
+  "paired_return_comparison": {
+    "baseline_mean_return": 99.54,
+    "baseline_median_return": 175.05,
+    "baseline_std_return": 129.46,
+    "pbrs_mean_return": 182.17,
+    "pbrs_median_return": 222.1,
+    "pbrs_std_return": 93.74,
+    "mean_paired_difference": 82.63,
+    "median_paired_difference": 36.25,
+    "std_paired_difference": 128.19,
+    "se_paired_difference": 12.82,
+    "bootstrap_95ci_paired_diff": [
+      58.0,
+      107.61
+    ],
+    "paired_t_test": {
+      "statistic": 6.4459,
+      "p_value": 4.2098068406189014e-09,
+      "df": 99
+    },
+    "wilcoxon_signed_rank_test": {
+      "statistic": 569.0,
+      "p_value": 1.7515475137527737e-11
+    }
+  },
+  "landing_success_comparison": {
+    "baseline_success_count": 57,
+    "baseline_success_rate_pct": 57.0,
+    "baseline_wilson_95ci_pct": [
+      47.2,
+      66.3
+    ],
+    "pbrs_success_count": 79,
+    "pbrs_success_rate_pct": 79.0,
+    "pbrs_wilson_95ci_pct": [
+      70.0,
+      85.8
+    ],
+    "contingency_table": {
+      "both_succeed": 52,
+      "baseline_succeed_pbrs_fail": 5,
+      "pbrs_succeed_baseline_fail": 27,
+      "both_fail": 16
+    },
+    "mcnemar_test": {
+      "chi2_statistic": 13.7812,
+      "p_value": 0.0002053757361412177,
+      "df": 1,
+      "continuity_corrected": true
+    },
+    "exact_binomial_test": {
+      "discordant_pairs_total": 32,
+      "pbrs_wins": 27,
+      "baseline_wins": 5,
+      "odds_ratio": 5.4,
+      "p_value": 0.00011307420209050179
+    }
+  },
+  "training_logs_verification": {
+    "baseline_total_timesteps": 300783,
+    "baseline_total_episodes": 856,
+    "pbrs_total_timesteps": 300752,
+    "pbrs_total_episodes": 872,
+    "logs_represent_native_unshaped_rewards": true
+  },
+  "generated_figures": [
+    "results\\figures\\success_rate_comparison.png",
+    "results\\figures\\native_return_distribution.png",
+    "results\\figures\\training_learning_curves.png"
+  ]
+}
